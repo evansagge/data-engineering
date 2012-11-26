@@ -22,3 +22,9 @@ end
 
 Fabricator :record do
 end
+
+Fabricator :user do
+  provider "openid"
+  uid "http://test.myopenid.com"
+  name "Test User"
+end

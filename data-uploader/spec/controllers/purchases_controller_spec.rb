@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe PurchasesController do
 
+  before { sign_in Fabricate(:user) }
+
   describe "GET index" do
     let!(:purchases) { (5..20).to_a.sample.times { Fabricate(:purchase) } }
 

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe RecordsController do
 
+  before { sign_in Fabricate(:user) }
+
   describe "GET index" do
     before do
       Record.any_instance.stub(:valid?).and_return true

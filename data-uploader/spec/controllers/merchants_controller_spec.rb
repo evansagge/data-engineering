@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe MerchantsController do
+
+  before { sign_in Fabricate(:user) }
+
   describe "GET index" do
     let!(:merchants) { 20.times { Fabricate(:merchant) } }
 

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe ItemsController do
 
+  before { sign_in Fabricate(:user) }
+
   describe "GET index" do
     let!(:items) { 20.times { Fabricate(:item) } }
 

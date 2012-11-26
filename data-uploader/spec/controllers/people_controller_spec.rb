@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe PeopleController do
 
+  before { sign_in Fabricate(:user) }
+
   describe "GET index" do
     let!(:persons) { 20.times { Fabricate(:person) } }
 

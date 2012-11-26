@@ -4,7 +4,7 @@ describe Record do
 
   it { should have_many :purchases }
 
-  it "should belong to user"
+  it { should belong_to :user }
 
   context "Given valid raw data" do
     let!(:record) { Record.create(raw_data: File.new(Rails.root.join("spec/fixtures/example_input.tab"))) }
