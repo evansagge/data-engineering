@@ -5,22 +5,7 @@ div class='page-header'
     br
     small = "#{@item.merchant.name} (#{@item.merchant.address})"
 
+= render "purchases/purchases", purchases: @item.purchases, total_price: @item.total_purchases, exclusions: [:merchant, :item]
 
-table class="table table-hover"
-  thead
-    tr
-      th Purchaser Name
-      th class="right" Purchase Count
-      th class="right" Total Price
-  tbody
-    - @item.purchases.each do |purchase|
-      tr
-        td = link_to purchase.purchaser_name, purchase.purchaser
-        td class="right" = purchase.quantity
-        td class="right" = number_to_currency purchase.total_price
-  tfoot
-    tr
-      td class="right" colspan=2
-        strong Total Purchases
-      td class="right" = number_to_currency @item.total_purchases
-
+p
+  = link_to "Back", items_path

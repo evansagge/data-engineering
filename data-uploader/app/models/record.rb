@@ -14,7 +14,7 @@ class Record < ActiveRecord::Base
 
   validates :raw_data, attachment_presence: true
 
-  delegate :name, to: :user, prefix: true
+  delegate :name, to: :user, prefix: true, allow_nil: true
 
   default_scope order('records.created_at DESC')
 

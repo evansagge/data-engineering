@@ -3,27 +3,6 @@ div class='page-header'
     ' People
     small = @person.name
 
-h4 Purchases
-table class="table table-hover"
-  thead
-    tr
-      th Item Description
-      th class="right" Item Price
-      th class="right" Purchase Count
-      th Merchant Address
-      th Merchant Name
-      th class="right" Total Price
-  tbody
-    - @person.purchases.each do |purchase|
-      tr
-        td = link_to purchase.item_description, purchase.item
-        td class="right" = number_to_currency purchase.item_price
-        td class="right" = purchase.quantity
-        td = link_to purchase.merchant_address, purchase.merchant
-        td = link_to purchase.merchant_name, purchase.merchant
-        td class="right" = number_to_currency purchase.total_price
-    tfoot
-      tr
-        td class="right" colspan=5
-          strong Total Purchases
-        td class="right" = number_to_currency @person.total_purchases
+= render "purchases/purchases", purchases: @person.purchases, total_price: @person.total_purchases, exclusions: [:purchaser]
+
+= link_to "Back", people_path

@@ -15,7 +15,7 @@ class RecordsController < ApplicationController
   end
 
   def create
-    @record = Record.create(params[:record])
+    @record = Record.create({user: current_user}.merge params[:record])
     if @record.valid? and @record.persisted?
       @record.process!
 

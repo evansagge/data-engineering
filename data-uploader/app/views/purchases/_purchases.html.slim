@@ -1,27 +1,37 @@
+- exclusions = local_assigns.has_key?(:exclusions) ? exclusions : []
+- total_price = local_assigns[:total_price] || @total_price
+- column_size = (6 - (exclusions.include?(:merchant) ? 2 : 0) - (exclusions.include?(:purchaser) ? 1 : 0) - (exclusions.include?(:item) ? 2 : 0))
+
 table class="table table-hover"
   thead
     tr
-      th Purchaser Name
-      th Item Description
-      th class="right" Item Price
-      th class="right" Purchase Count
-      th Merchant Address
-      th Merchant Name
+      - unless exclusions.include?(:purchaser)
+        th Purchaser Name
+      - unless exclusions.include?(:item)
+        th Item Description
+        th class="right" Item Price
+      th class="right" Quantity
+      - unless exclusions.include?(:merchant)
+        th Merchant Address
+        th Merchant Name
       th class="right" Total Price
   tbody
     - purchases.each do |purchase|
       tr
-        td = link_to purchase.purchaser_name, purchase.purchaser
-        td = link_to purchase.item_description, purchase.item
-        td class="right" = number_to_currency purchase.item_price
+        - unless exclusions.include?(:purchaser)
+          td = link_to purchase.purchaser_name, purchase.purchaser
+        - unless exclusions.include?(:item)
+          td = link_to purchase.item_description, purchase.item
+          td class="right" = number_to_currency purchase.item_price
         td class="right" = purchase.quantity
-        td = link_to purchase.merchant_address, purchase.merchant
-        td = link_to purchase.merchant_name, purchase.merchant
+        - unless exclusions.include?(:merchant)
+          td = link_to purchase.merchant_address, purchase.merchant
+          td = link_to purchase.merchant_name, purchase.merchant
         td class="right" = number_to_currency purchase.total_price
-  - if @total_price
+  - if total_price
     tfoot
       tr
-        td class="right" colspan=6
+        td class="right" colspan=column_size
           strong Total
-        td class="right" = number_to_currency @total_price
+        td class="right" = number_to_currency total_price
 

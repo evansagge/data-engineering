@@ -1,16 +1,20 @@
+- exclusions = local_assigns.has_key?(:exclusions) ? exclusions : []
+
 table class="table table-hover"
   thead
     tr
       th Item Description
       th class="right" Item Price
-      th Merchant Name
-      th Merchant Address
+      - unless exclusions.include?(:merchant)
+        th Merchant Name
+        th Merchant Address
       th class="right" Purchased Count
   tbody
     - items.each do |item|
       tr
         td = link_to item.description, item
         td class="right" = number_to_currency item.price
-        td = link_to item.merchant.name, item.merchant
-        td = item.merchant.address
+        - unless exclusions.include?(:merchant)
+          td = link_to item.merchant.name, item.merchant
+          td = item.merchant.address
         td class="right" = item.purchases.count
