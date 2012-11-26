@@ -1,0 +1,42 @@
+div class='page-header'
+  h1
+    ' Merchants
+    br
+    small = "#{@merchant.name} - #{@merchant.address}"
+
+h4 Items
+table class="table table-hover"
+  thead
+    tr
+      th Item Description
+      th class="right" Item Price
+      th class="right" Purchased Count
+  tbody
+    - @merchant.items.each do |item|
+      tr
+        td = link_to item.description, item
+        td class="right" = number_to_currency item.price
+        td class="right" = item.purchases.sum(:quantity)
+
+h4 Purchases
+table class="table table-hover"
+  thead
+    tr
+      th Purchaser Name
+      th Item Description
+      th class="right" Item Price
+      th class="right" Purchase Count
+      th class="right" Total Price
+  tbody
+    - @merchant.purchases.each do |purchase|
+      tr
+        td = link_to purchase.purchaser_name, purchase.purchaser
+        td = link_to purchase.item_description, purchase.item
+        td class="right" = number_to_currency purchase.item_price
+        td class="right" = purchase.quantity
+        td class="right" = number_to_currency purchase.total_price
+  tfoot
+    tr
+      td class="right" colspan=4
+        strong Total Purchases
+      td class="right" = number_to_currency @merchant.total_purchases

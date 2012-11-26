@@ -1,0 +1,6 @@
+div class='page-header'
+  h1 People
+
+= render "people", people: @people
+
+= paginate @people, outer_window: 7

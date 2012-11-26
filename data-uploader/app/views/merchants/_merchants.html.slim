@@ -1,0 +1,14 @@
+table class="table table-hover"
+  thead
+    tr
+      th Merchant Name
+      th Merchant Address
+      th class="right" Item Count
+      th class="right" Purchased Count
+  tbody
+    - merchants.each do |merchant|
+      tr
+        td = link_to merchant.name, merchant
+        td = merchant.address
+        td class="right" = merchant.items_count
+        td class="right" = merchant.purchases_count

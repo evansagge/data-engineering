@@ -1,0 +1,23 @@
+div class='page-header'
+  h1 Uploaded Records
+
+= render 'form'
+
+table class="table table-hover"
+  thead
+    tr
+      th Status
+      th Filename
+      th Date Uploaded
+      th Uploaded By
+      th
+  tbody
+    - @records.each do |record|
+      tr class=record_row_class(record)
+        td = record_status record
+        td = link_to_if record.success?, record.raw_data_file_name, record
+        td = time_tag record.created_at
+        td = record.user_name
+        td = link_to content_tag(:i, nil, class: "icon-trash"), record, confirm: 'Are you sure you want to delete this record and all data uploaded from it?', method: :delete
+
+= paginate @records, outer_window: 7

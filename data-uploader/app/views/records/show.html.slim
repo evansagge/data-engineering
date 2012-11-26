@@ -1,0 +1,7 @@
+div class='page-header'
+  h1
+    ' Uploaded Record
+    br
+    small Uploaded on #{time_tag @record.created_at}
+
+= render "purchases/purchases", purchases: @purchases

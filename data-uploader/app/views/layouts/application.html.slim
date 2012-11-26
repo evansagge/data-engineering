@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title Data Engineering
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  body
+    div class="navbar navbar-inverse navbar-fixed-top"
+      div class="navbar-inner"
+        div class="container-fluid"
+          a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse"
+            span class="icon-bar"
+            span class="icon-bar"
+            span class="icon-bar"
+          = link_to "Home", root_path, class: "brand active"
+          div class="nav-collapse collapse"
+            ul class="nav"
+              = active_li "Purchases", purchases_path
+              = active_li "Merchants", merchants_path
+              = active_li "Items", items_path
+              = active_li "People", people_path
+
+            ul class="nav pull-right"
+              = active_li "Profile", user_path
+              li
+                = link_to "Log Out", logout_path
+
+    div class="container-fluid"
+      - unless flash.empty?
+        div class="row-fluid"
+          = render "flash_messages"
+
+      div class="row-fluid"
+        div class="span12"
+          = yield
+        / div class="span3"
+        /   = render "sidebar"

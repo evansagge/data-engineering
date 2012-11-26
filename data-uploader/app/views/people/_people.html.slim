@@ -1,0 +1,12 @@
+table class="table table-hover"
+  thead
+    tr
+      th Name
+      th class="right" Purchase Count
+      th class="right" Total Purchase
+  tbody
+    - people.each do |person|
+      tr
+        td = link_to person.name, person
+        td class="right" = person.purchases_count
+        td class="right" = number_to_currency person.total_purchases
