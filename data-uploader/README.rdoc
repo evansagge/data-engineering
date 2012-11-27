@@ -12,7 +12,7 @@
         rake db:migrate
 
 3. Run specs to verify integrity
-        rspec .
+        rake db:test:prepare && rspec .
 
 4. Launch application
         rails s
